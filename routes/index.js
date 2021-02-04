@@ -7,6 +7,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/api', function(req, res, next){
   const config = require('../config');
+  delete config.databaseAccess;
   res.json(config);
 });
 

@@ -31,6 +31,24 @@ class Login{
     });
   }
 
+  checkLogin(req, res){
+    if(req.session.user){
+      res.json({logged: true});
+    }else{
+      res.json({logged: false});
+    }
+  }
+
+  logOut(req, res){
+    if(req.session.user){
+      req.session.destroy(function (err) {
+        console.log(err);
+        res.json({success: false});
+      });  
+    }
+    res.json({success: true});
+  }
+
 }//end class
 
 module.exports = new Login();
