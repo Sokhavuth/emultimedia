@@ -3,8 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+
+const mongoose = require('mongoose');
+const vdict = require('./config');
+const databaseAccess = vdict.databaseAccess;
+mongoose.connect(databaseAccess, {useNewUrlParser: true, useUnifiedTopology: true});
 
 global.__basedir = __dirname;
+process.env.TZ = "Asia/Phnom_Penh";
 
 var indexRouter = require('./routes/index');
 var adminRouter = require('./routes/admin');
@@ -20,8 +28,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'react/frontend/build')));
-app.use(express.static(path.join(__dirname, 'react/backend/build')));
+app.use(express.static(path.join(__dirname, 'frontend/build')));
+app.use(session({
+  secret: databaseAccess,
+  resave: false,
+  saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
 
 app.use('/', indexRouter);
 app.use('/admin', adminRouter);
