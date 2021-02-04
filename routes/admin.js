@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
-  res.sendFile(__basedir+'/react/backend/build/index.html');
+router.post('/login', function(req, res, next) {
+  res.json({email: req.body.email});
 });
 
 module.exports = router;
