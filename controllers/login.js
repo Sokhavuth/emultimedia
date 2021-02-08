@@ -3,7 +3,7 @@ class Login{
   constructor(){
     this.deepcopy = require('deepcopy');
     this.vdict = require('../config');
-    this.usersdb = require('../models/usersdb');
+    this.usersdb = require('../models/dashboard/usersdb');
     this.bcrypt = require('bcryptjs');
   }
 

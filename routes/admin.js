@@ -1,5 +1,4 @@
 // routes/admin.js
-const e = require('express');
 var express = require('express');
 var router = express.Router();
 
@@ -18,14 +17,7 @@ router.get('/logout', function(req, res, next){
   login.logOut(req, res);
 });
 
-router.get('/category/api', function(req, res, next){
-  if(req.session.user){
-    const category = require('../controllers/category');
-    category.getDateTime(req, res);
-  }else{
-    redirect('/login');
-  }
-
-});
+const routerCategory = require('./dashboard/category');
+router.use('/category', routerCategory);
 
 module.exports = router;
