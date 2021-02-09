@@ -33,7 +33,7 @@ class Category{
     try{
       const categories = await categorydb.getCategories(config.dashboardLimit);
       const amount = await categorydb.countCategory();
-      data.itemsListig = categories;
+      data.itemsListing = categories;
       if(amount === 1){
         message = amount + ' category was created.';
       }else{
