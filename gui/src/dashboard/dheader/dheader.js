@@ -43,7 +43,7 @@ class DHeader extends React.Component{
                   <option>Author</option>
                 </select>
                 <input type="text" name="querry" placeholder="Search" />
-                <input type="submit" />
+                <input type="submit" value='Submit' />
               </form>
               <div id="logout"><a href onClick={()=>this.logOut('/admin/logout')}>Logout</a></div>
             </div>

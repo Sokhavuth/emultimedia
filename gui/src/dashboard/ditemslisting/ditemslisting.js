@@ -7,8 +7,9 @@ class Ditemslisting extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listing: '',
-      message: false
+      listing: [],
+      message: false,
+      page: 0
     }
   }
 
@@ -53,12 +54,24 @@ class Ditemslisting extends React.Component {
         this.setState({message: result.message});
       }
 
-      this.setState({listing: html});
+      const listing = this.state.listing;
+      const newHtml = listing.concat(html);
+
+      this.setState({listing: newHtml});
     }
   }
 
   toFrontendItem = (id) => {
     alert(id)
+  }
+
+  paginate = async () => {
+    let p = this.state.page;
+    this.setState({page: ++p});
+    const option = {page: p}
+
+    const result = await tool.fetchPostAPI('/admin/category/page/api', option);
+    this.listItems(result);
   }
 
   render(){
@@ -70,7 +83,7 @@ class Ditemslisting extends React.Component {
         </ul>
         <ul>
         <li className="item load-more">
-          <img alt='' src='/images/load-more.png' />
+          <img alt='' onClick={this.paginate} src='/images/load-more.png' />
         </li>
         </ul>
       </div>

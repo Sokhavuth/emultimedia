@@ -61,7 +61,7 @@ class DCategory extends React.Component{
       <div className="DCategory">
         <CKEditor getContent = {this.getCKEditorContent} />
         <form className='category-form' onSubmit={this.onSubmitHandler} >
-          <input id="submit" type='submit' />
+          <input id="submit" type='submit' value='Submit' />
           <input type='text' onChange={this.onChangeHandler} name='categoryName' placeholder='category name' required='required' />
           <input type='date' onChange={this.onChangeHandler} value={this.state.date} name='date' required='required' />
           <input type='time' onChange={this.onChangeHandler} value={this.state.time} name='time' required='required' />

@@ -29,9 +29,15 @@ class Category{
 
     const data = {};
     let message = '';
+    var categories = [];
 
     try{
-      const categories = await categorydb.getCategories(config.dashboardLimit);
+      if(req.body.page){
+        categories = await categorydb.getCategories(config.dashboardLimit, false, req.body.page);
+      }else{
+        categories = await categorydb.getCategories(config.dashboardLimit);
+      }
+
       const amount = await categorydb.countCategory();
       data.itemsListing = categories;
       if(amount === 1){
@@ -42,7 +48,7 @@ class Category{
       data.message = message;
       res.json(data);
     }catch(err){
-     console.log(err);
+      console.log(err);
     }
   }
 
