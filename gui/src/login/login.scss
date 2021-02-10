@@ -1,0 +1,27 @@
+.Login{
+  margin-top: 30px;
+  background:lightgrey;
+  border-radius:3px;
+  max-width:450px;
+  #login{
+    display:grid;
+    grid-template-columns: 30% auto;
+    grid-gap:5px;
+    align-items: center;
+    margin:30px auto 0;
+    padding:20px;
+    span{
+      text-align:right;
+    }
+    input{
+      padding:0 5px;
+      font:14px/1.75 Vidaloka;
+    }
+    input[type=submit]{
+      padding: 3px;
+    }
+  }
+  .message{
+    padding-bottom: 10px;
+  }
+}

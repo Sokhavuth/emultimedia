@@ -1,0 +1,64 @@
+.Ditemslisting{
+  .message{
+    text-align: center;
+    padding: 5px;
+    background: rgb(245, 244, 244);
+    border: 1px solid lightgrey
+  }
+  .item{
+    display: grid;
+    grid-template-columns: 12.5% auto 10%;
+    grid-gap: 10px;
+    align-items: center;
+    list-style-type: none;
+    width: 100%;
+    margin-top: 10px;
+    background: rgb(245, 244, 244);
+    width: 100%;
+    border: 1px solid lightgrey;
+    overflow: hidden;
+    .img-wrapper{
+      position: relative;
+      padding-top: 56.25%;
+      img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: 100%;
+      }
+      img:hover{
+        cursor: pointer;
+        opacity: .7;
+      }
+    }
+    a:hover{
+      cursor: pointer;
+    }
+    .edit-delete{
+      text-align: right;
+      img{
+       width: 35%;
+       margin: 0 5px;
+       visibility: hidden;
+      }
+    }
+  }
+  .item:hover .edit-delete img{
+    visibility: visible;
+  } 
+
+  .load-more{
+    display: block;
+    text-align: center;
+    padding: 5px 0 2px;
+    img{
+      width: 30px;
+    }
+    img:hover{
+      opacity: .5;
+      cursor: pointer;
+    }
+  }
+
+}

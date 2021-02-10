@@ -1,0 +1,24 @@
+.DSidebar{
+  padding-right: 20px;
+  .sidebar-wrapper{
+    position: fixed;
+  }
+  .menu-item{
+    display: grid;
+    grid-template-columns: 30% auto;
+    align-items: center;
+    grid-gap: 10px;
+    text-align: left;
+    margin-bottom: 10px;
+    width: 100%;
+    img{
+      width: 100%;
+    }
+    a{
+      font: 18px/1.5 Oswald;
+    }
+  }
+  .menu-item:last-child{
+    margin-bottom: 0;
+  }
+}

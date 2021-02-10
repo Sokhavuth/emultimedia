@@ -1,0 +1,66 @@
+*{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+}
+body{
+  font:14px Vidaloka;
+}
+a{
+  color:darkblue;
+  text-decoration: none;
+}
+a:hover{
+  opacity:.7;
+}
+.region{
+  max-width: 1100px;
+  margin:0 auto;
+}
+
+.DHeader{
+  margin-bottom: 30px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: teal;
+}
+#header-outer{
+  
+  color:white;
+  padding: 3px 0;
+  h1{
+    color: white;
+    font: 26px/1.5 PirataOne;
+    text-align: left;
+  }
+}
+.header-inner{
+  display:grid;
+  grid-template-columns:30% auto 20%;
+  align-items: center;
+  form{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% auto 15%;
+    select, input{
+      font:14px/1.5 Vidaloka, OdorMeanChey;
+      padding: 0 7px;
+    }
+  }
+  #logout{
+    text-align: right;
+    a{
+      color:white;
+    }
+    a:hover{
+      cursor: pointer;
+    }
+  }
+}
+
+.main{
+  display: grid;
+  grid-template-columns: 20% auto;
+}

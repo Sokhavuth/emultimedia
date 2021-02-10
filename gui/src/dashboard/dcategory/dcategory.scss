@@ -1,0 +1,16 @@
+.DCategory{
+  padding-left: 20px;
+  border-left: 1px solid lightgrey;
+  text-align: left;
+  .category-form{
+    display: grid;
+    grid-template-columns: 10% auto 25% 25%;
+    input{
+      font: 14px/1.5 VidaLoka;
+      padding: 0 10px;
+    }
+    input[type=date], input[type=time]{
+      text-align: center;
+    }
+  }
+}
