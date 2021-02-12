@@ -56,7 +56,8 @@ class DCategory extends React.Component{
     this.setState({
       newItem: result, 
       categoryName: '',
-      deleteitem: false
+      deleteitem: false,
+      id: false
     });
     this.editor.setData('');
     this.editor.submit = false;

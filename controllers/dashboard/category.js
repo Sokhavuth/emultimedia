@@ -10,7 +10,7 @@ class Category{
 
   async postCategory(req, res){
     const categorydb = require('../../models/dashboard/categorydb');
-    //
+    
     const data = {};
     let category = false;
 
