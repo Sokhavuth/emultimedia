@@ -1,6 +1,7 @@
 import React from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import Editor from 'ckeditor5-custom-build/ckeditor';
+import Editor from 'ckeditor5-custom-build/build/ckeditor';
+
 import './dckeditor.scss';
 
 class DCKEditor extends React.Component{
@@ -9,10 +10,10 @@ class DCKEditor extends React.Component{
     let editorConfig = {
       toolbar: ['fontfamily', 'fontsize', 'fontcolor', 'bold', 'italic', 'bulletedList', 'indent', 'outdent', 
       'numberedList', 'link', 'blockQuote', 'code', 'codeblock', 'imageinsert', 'mediaembed', 'undo', 'redo' ],
-      language: 'en',
     };
     this.state = {
       config: editorConfig,
+      data: '',
     }
   }
 
@@ -22,20 +23,28 @@ class DCKEditor extends React.Component{
         <CKEditor
           editor={ Editor }
           config={ this.state.config }
-          data=""
+          
           onReady={ editor => {
             this.props.getContent(editor);
           } }
           onChange={ ( event, editor ) => {
-            //const data = editor.getData();
-            //this.props.getContent(data);
+            editor.change = true
           } }
           onBlur={ ( event, editor ) => {
-            //console.log( 'Blur.', editor );
+            const promise = new Promise((resolve) => {resolve(editor.submit)});
+
+            promise.then((submit) => {
+              if(!submit && editor.change){
+                window.confirm('Are you sure you want to leave?');
+                editor.change = false;
+              }
+            });
+            
           } }
           onFocus={ ( event, editor ) => {
             //console.log( 'Focus.', editor );
           } }
+          
         />
       </div>
       

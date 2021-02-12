@@ -33,6 +33,22 @@ class Categorydb{
     return await this.categories.countDocuments({});
   }
 
+  async updateCategory(req){
+    const category = await this.categories.findOne({id:req.body.id});
+    category.id = req.body.id;
+    category.name = req.body.categoryName;
+    category.date = new Date(req.body.date +' ' + req.body.time);
+    
+    return await category.save();
+  }
+
+  async deleteCategory(req){
+    const category = await this.categories.findOne({id:req.body.id});
+    const name = category.name;
+    await this.categories.deleteOne({id:req.body.id});
+    return name;
+  }
+
 }// end class
 
 module.exports = new Categorydb();

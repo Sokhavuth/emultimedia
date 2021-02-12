@@ -1,6 +1,5 @@
 import React from 'react';
 import './dcategory.scss';
-import $ from 'jquery';
 
 import CKEditor from '../dckeditor/dckeditor.js';
 import tool from '../../tool.js';
@@ -13,9 +12,11 @@ class DCategory extends React.Component{
       date: false, 
       time: false,
       categoryName: '',
+      id: false,
       content: '',
       amount: '',
-      newItem: false
+      newItem: false,
+      deleteitem: false
     };
 
     this.getDateTime();
@@ -27,11 +28,9 @@ class DCategory extends React.Component{
   }
 
   getCKEditorContent = (editor) => {
-    $('#submit').on('click', () => {
-      const editorData = editor.getData();
-      this.setState({content: editorData});
-      editor.setData('');
-    });
+    this.editor = editor;
+    editor.change = false;
+    editor.edit = false;
   }
 
   onChangeHandler = (event) => {
@@ -43,17 +42,48 @@ class DCategory extends React.Component{
   onSubmitHandler = async (event) => {
     event.preventDefault();
     const uri = '/admin/category/api';
+    this.editor.edit = true;
     const data = {
       date: this.state.date,
       time: this.state.time,
       categoryName: this.state.categoryName,
-      content: this.state.content
+      content: this.editor.getData(),
+      id: this.state.id,
     }
 
     const result = await tool.fetchPostAPI(uri, data);
     this.getDateTime();
-    this.setState({newItem: result});
-    $('input[name="categoryName"').val('');
+    this.setState({
+      newItem: result, 
+      categoryName: '',
+      deleteitem: false
+    });
+    this.editor.setData('');
+    this.editor.submit = false;
+    this.editor.change = false;
+  }
+
+  editItem = async (id) => {
+    const result = await tool.fetchPostAPI('/admin/category/edit/api', {id: id});
+    this.editor.setData(result.itemsListing.content);
+    this.setState({
+      id: result.itemsListing.id,
+      date: new Date(result.itemsListing.date).toLocaleDateString('fr-CA'),
+      time: new Date(result.itemsListing.date).toLocaleTimeString('it-IT'),
+      content: result.itemsListing.content,
+      categoryName: result.itemsListing.name,
+    });
+    
+  }
+
+  deleteItem = async (id) => {
+    const result = await tool.fetchPostAPI('/admin/category/delete/api', {id: id});
+    this.getDateTime();
+    this.setState({
+      categoryName: '',
+      deleteitem: result.message,
+      newItem: false
+    });
   }
 
   render(){
@@ -62,12 +92,18 @@ class DCategory extends React.Component{
         <CKEditor getContent = {this.getCKEditorContent} />
         <form className='category-form' onSubmit={this.onSubmitHandler} >
           <input id="submit" type='submit' value='Submit' />
-          <input type='text' onChange={this.onChangeHandler} name='categoryName' placeholder='category name' required='required' />
+          <input type='text' onChange={this.onChangeHandler} value={this.state.categoryName} name='categoryName' placeholder='category name' required='required' />
           <input type='date' onChange={this.onChangeHandler} value={this.state.date} name='date' required='required' />
           <input type='time' onChange={this.onChangeHandler} value={this.state.time} name='time' required='required' />
         </form>
         
-        <Ditemslisting  uri='/admin/category/api' newItem={this.state.newItem} />
+        <Ditemslisting  
+          uri='/admin/category/api' 
+          newItem={this.state.newItem} 
+          deleteitem={this.state.deleteitem}
+          editItem={this.editItem}
+          deleteItem={this.deleteItem}
+        />
 
       </div>
     );
