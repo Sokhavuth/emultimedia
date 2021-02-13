@@ -37,6 +37,7 @@ class Category{
     let message = '';
     var categories = [];
 
+
     try{
       const amount = await categorydb.countCategory();
 
@@ -51,14 +52,18 @@ class Category{
         categories = await categorydb.getCategories(config.dashboardLimit, req.body.id);
         data.message = `Category «${categories.name}» is beging edited.`
       }else{
-        categories = await categorydb.getCategories(config.dashboardLimit);
+        if(req.query.amount === 'all'){
+          categories = await categorydb.getCategories('all');
+        }else{
+          categories = await categorydb.getCategories(config.dashboardLimit);
+        }
+        
         if(amount === 1){
           message = amount + ' category was created.';
         }else{
           message = amount + ' categories were created.';
         }
         data.message = message;
-        console.log(data.message)
       }
 
       data.itemsListing = categories;

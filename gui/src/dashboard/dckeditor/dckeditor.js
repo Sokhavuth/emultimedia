@@ -8,7 +8,7 @@ class DCKEditor extends React.Component{
   constructor(props){
     super(props);
     let editorConfig = {
-      toolbar: ['fontfamily', 'fontsize', 'fontcolor', 'bold', 'italic', 'bulletedList', 'indent', 'outdent', 
+      toolbar: ['fontfamily', 'fontsize', 'fontcolor', 'bold', 'italic', 'alignment', 'bulletedList', 'indent', 'outdent', 
       'numberedList', 'link', 'blockQuote', 'code', 'codeblock', 'imageinsert', 'mediaembed', 'undo', 'redo' ],
     };
     this.state = {

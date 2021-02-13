@@ -4,6 +4,7 @@
  */
 
 import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave.js';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment'; 
 
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
 import AutoImage from '@ckeditor/ckeditor5-image/src/autoimage.js';
@@ -36,6 +37,7 @@ class Editor extends ClassicEditor {}
 
 // Plugins to include in the build.
 Editor.builtinPlugins = [
+	Alignment,
 	Autosave,
 	AutoImage,
 	Autoformat,

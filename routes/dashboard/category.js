@@ -36,7 +36,7 @@ router.post('/page/api', function(req, res, next){
 });
 
 router.post('/edit/api', function(req, res, next){
-  if(req.session.user){
+  if(req.session.user.role === "Admin"){
     const category = require('../../controllers/dashboard/category');
     category.getCategories(req, res);
     
@@ -45,10 +45,9 @@ router.post('/edit/api', function(req, res, next){
 });
 
 router.post('/delete/api', function(req, res, next){
-  if(req.session.user){
+  if(req.session.user.role === "Admin"){
     const category = require('../../controllers/dashboard/category');
     category.deleteCategory(req, res);
-    
   }else
     res.redirect('/');
 });

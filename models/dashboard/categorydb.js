@@ -24,6 +24,8 @@ class Categorydb{
       return await this.categories.findOne({id: id});
     }else if(page){
       return await this.categories.find().skip(amount * page).sort({date: -1, _id: -1}).limit(amount);
+    }else if(amount === 'all'){
+      return await this.categories.find().sort({date: -1, _id: -1});
     }else{
       return await this.categories.find().sort({date: -1, _id: -1}).limit(amount);
     }

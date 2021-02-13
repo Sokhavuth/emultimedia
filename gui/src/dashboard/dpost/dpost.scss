@@ -1,0 +1,25 @@
+.DPost{
+  padding-left: 20px;
+  border-left: 1px solid lightgrey;
+  text-align: left;
+  .post-form{
+    display: grid;
+    grid-template-columns: 10% 25% 25% 40%;
+    input, select{
+      font: 14px/1.5 VidaLoka;
+      padding: 0 10px;
+    }
+    select{
+      padding: 5px;
+    }
+    input[type=date], input[type=time]{
+      text-align: center;
+    }
+    input[name=postTitle]{
+      grid-column: 1 / span 3;
+    }
+    input[name=category]{
+      grid-column: 4 / span 1;
+    }
+  }
+}

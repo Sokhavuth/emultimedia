@@ -20,4 +20,7 @@ router.get('/logout', function(req, res, next){
 const routerCategory = require('./dashboard/category');
 router.use('/category', routerCategory);
 
+const routerPost = require('./dashboard/post');
+router.use('/post', routerPost);
+
 module.exports = router;
