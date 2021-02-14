@@ -40,12 +40,12 @@ class Post{
     try{
       const amount = await postdb.countPost();
 
-      if(req.body.page){
-        posts = await postdb.getPosts(config.dashboardLimit, false, req.body.page);
+      if(req.query.page){
+        posts = await postdb.getPosts(config.dashboardLimit, false, req.query.page);
         if(posts.length > 0){
-          data.message = config.dashboardLimit + ' more categories were added';
+          data.message = posts.length + ' more posts were added';
         }else{
-          data.message = '0 categories were added';
+          data.message = '0 post were added';
         }
       }else if(req.body.id){
         posts = await postdb.getPosts(config.dashboardLimit, req.body.id);
@@ -67,22 +67,22 @@ class Post{
       console.log(err);
     }
   }
-/*
-  async deleteCategory(req, res){
-    const categorydb = require('../../models/dashboard/categorydb');
+
+  async deletePost(req, res){
+    const postdb = require('../../models/dashboard/postdb');
 
     const data = {};
 
     try{
-      const name = await categorydb.deleteCategory(req);
-      data.message = `Category «${name}» has been deleted.`;
+      const name = await postdb.deletePost(req);
+      data.message = `Post «${name}» has been deleted.`;
       res.json(data);
     }catch(err){
       console.log(err);
     }
 
   }
-*/
+
 }//end class
 
 module.exports = new Post();

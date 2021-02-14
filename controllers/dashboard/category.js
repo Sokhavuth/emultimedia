@@ -41,10 +41,10 @@ class Category{
     try{
       const amount = await categorydb.countCategory();
 
-      if(req.body.page){
-        categories = await categorydb.getCategories(config.dashboardLimit, false, req.body.page);
+      if(req.query.page){
+        categories = await categorydb.getCategories(config.dashboardLimit, false, req.query.page);
         if(categories.length > 0){
-          data.message = config.dashboardLimit + ' more categories were added';
+          data.message = categories.length + ' more categories were added';
         }else{
           data.message = '0 categories were added';
         }

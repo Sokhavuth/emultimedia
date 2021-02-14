@@ -35,23 +35,24 @@ class Postdb{
   async countPost(){
     return await this.post.countDocuments({});
   }
-/*
-  async updateCategory(req){
-    const category = await this.categories.findOne({id:req.body.id});
-    category.id = req.body.id;
-    category.name = req.body.categoryName;
-    category.date = new Date(req.body.date +' ' + req.body.time);
+
+  async updatePost(req){
+    const post = await this.post.findOne({id:req.body.id});
+    post.id = req.body.id;
+    post.name = req.body.title;
+    post.date = new Date(req.body.date +' ' + req.body.time);
+    post.category = req.body.category;
     
-    return await category.save();
+    return await post.save();
   }
 
-  async deleteCategory(req){
-    const category = await this.categories.findOne({id:req.body.id});
-    const name = category.name;
-    await this.categories.deleteOne({id:req.body.id});
+  async deletePost(req){
+    const post = await this.post.findOne({id:req.body.id});
+    const name = post.name;
+    await this.post.deleteOne({id:req.body.id});
     return name;
   }
-*/
+
 }// end class
 
 module.exports = new Postdb();

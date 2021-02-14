@@ -88,24 +88,26 @@ class DPost extends React.Component{
   }
 
   editItem = async (id) => {
-    const result = await tool.fetchPostAPI('/admin/category/edit/api', {id: id});
+    const result = await tool.fetchPostAPI('/admin/post/edit/api', {id: id});
     this.editor.setData(result.itemsListing.content);
     this.setState({
       id: result.itemsListing.id,
       date: new Date(result.itemsListing.date).toLocaleDateString('fr-CA'),
       time: new Date(result.itemsListing.date).toLocaleTimeString('it-IT'),
       content: result.itemsListing.content,
-      categoryName: result.itemsListing.name,
+      postTitle: result.itemsListing.name,
+      category: (result.itemsListing.category).toString()
     });
     
   }
 
   deleteItem = async (id) => {
-    const result = await tool.fetchPostAPI('/admin/category/delete/api', {id: id});
+    const result = await tool.fetchPostAPI('/admin/post/delete/api', {id: id});
     this.getDateTime();
     this.setState({
-      categoryName: '',
+      postTitle: '',
       deleteitem: result.message,
+      category: '',
       newItem: false
     });
   }
@@ -133,7 +135,6 @@ class DPost extends React.Component{
           deleteItem={this.deleteItem}
         />
 
-   
       </div>
     );
   }

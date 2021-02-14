@@ -88,9 +88,8 @@ class Ditemslisting extends React.Component {
     $('.load-more img').attr('src', '/images/loading.gif');
     let p = this.state.page;
     this.setState({page: ++p, pagination: true});
-    const option = {page: p}
 
-    const result = await tool.fetchPostAPI('/admin/category/page/api', option);
+    const result = await tool.fetchAPI(this.props.uri+'?page='+p);
     this.listItems(result);
     $('.load-more img').attr('src', '/images/load-more.png');
   }
