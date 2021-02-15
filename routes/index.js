@@ -11,4 +11,9 @@ router.get('/api', function(req, res, next){
   res.json(config);
 });
 
+router.get('/api/post', function(req, res, next){
+  const post = require('../controllers/post');
+  post.getPost(req, res);
+});
+
 module.exports = router;

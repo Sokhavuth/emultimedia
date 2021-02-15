@@ -5,12 +5,14 @@ import Header from '../header/header.js';
 import Footer from '../footer/footer.js'
 import Channel from '../channel/channel.js';
 import Login from '../login/login.js';
+import Post from '../post/post.js';
 
 const indexRouter = [
   <Route exact path="/">
     <Header />
     <Menu />
     <Channel />
+    <Post />
     <Footer />
   </Route>,
   <Route exact path="/news">
